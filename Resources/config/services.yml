@@ -1,0 +1,18 @@
+parameters:
+    ctors.cache_dir: '/user_cache/'
+services:
+    ctors.filesystem:
+        class: Symfony\Component\Filesystem\Filesystem
+    ctors.cache:
+        class: Ctors\FilesystemCacheBundle\CacheProvider\FilesystemCache
+        arguments: ['%kernel.cache_dir%%ctors.cache_dir%', '@ctors.filesystem']
+    ctors.cache.warmer:
+        class: Ctors\FilesystemCacheBundle\CacheListener\FilesystemCacheWarmer
+        arguments: ['%ctors.cache_dir%', '@ctors.filesystem']
+        tags:
+            - { name: kernel.cache_warmer }
+    ctors.cache.clearer:
+        class: Ctors\FilesystemCacheBundle\CacheListener\FilesystemCacheClearer
+        arguments: ['%ctors.cache_dir%', '@ctors.filesystem']
+        tags:
+            - { name: kernel.cache_clearer }

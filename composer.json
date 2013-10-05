@@ -1,0 +1,22 @@
+{
+    "name": "ctors/filesystem-cache-bundle",
+    "type": "symfony-bundle",
+    "description": "Adds a filesystem cache option",
+    "keywords": ["filesystem", "cache", "bundle"],
+    "homepage": "https://github.com/tvlooy/CtorsFilesystemCacheBundle",
+    "license": "ISC",
+    "authors": [
+        {
+            "name": "Tom Van Looy",
+            "email": "tom@ctors.net"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "henrikbjorn/lurker": "dev-master"
+    },
+    "autoload": {
+        "psr-0": { "Ctors\\FilesystemCacheBundle": "" }
+    },
+    "target-dir": "Ctors/FilesystemCacheBundle"
+}
