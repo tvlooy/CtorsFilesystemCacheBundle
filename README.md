@@ -24,7 +24,7 @@ public function registerBundles() {
 }
 ```
 ### Service usage
-The cache service's name is ctors.cache. You can alias it in your project's config.yml:
+The cache service's name is ```ctors.cache```. You can alias it in your project's ```config.yml```:
 
 ```yaml
 service:
@@ -32,7 +32,7 @@ service:
         alias: ctors.cache
 ```
 
-The cache implements the Doctrine CacheProvider interface. Simple usage example:
+The cache implements the [Doctrine CacheProvider](https://github.com/doctrine/cache/blob/master/lib/Doctrine/Common/Cache/CacheProvider.php) interface. Simple usage example:
 
 ```php
 /** @var \Doctrine\Common\Cache\CacheProvider $cache */
@@ -44,11 +44,12 @@ if ($cache->contains($searchKey)) {
     $value = new SomeValue();
     $cache->save($searchKey, serialize($value));
 }
+```
 
 ### Command usage
 There is a command that prints the cache usage:
 
-```shell
+```bash
 $ app/console ctors:filesystemcache:stats 
 Filesystem cache statistics (05/10/2013 15:07:09)
   - number of objects 3
@@ -57,7 +58,7 @@ Filesystem cache statistics (05/10/2013 15:07:09)
 
 You can also watch the cache, it will update any time a resource is added or removed:
 
-```shell
+```bash
 $ app/console ctors:filesystemcache:stats -w
 Filesystem cache statistics (05/10/2013 15:07:11)
   - number of objects 3
@@ -69,4 +70,8 @@ Filesystem cache statistics (05/10/2013 15:07:22)
   - number of objects 5
   - disk usage 48K
 ```
+
+### Notes
+I added a CacheWarmer and CacheClearer listener. At the moment they just make sure the cache directory exists (warmer) and is removed (clearer).
+You could extend these to for example mount a tmpfs on the cache directory. It's just an idea.
 

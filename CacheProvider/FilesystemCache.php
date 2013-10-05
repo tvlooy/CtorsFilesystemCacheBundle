@@ -23,7 +23,7 @@ class FilesystemCache extends CacheProvider
      */
     protected function doFetch($id)
     {
-        return @file_get_contents($this->addPath($id));
+        return @file_get_contents($this->getCachePath($id));
     }
 
     /**
@@ -31,7 +31,7 @@ class FilesystemCache extends CacheProvider
      */
     protected function doContains($id)
     {
-        return file_exists($this->addPath($id));
+        return file_exists($this->getCachePath($id));
     }
 
     /**
@@ -39,7 +39,9 @@ class FilesystemCache extends CacheProvider
      */
     protected function doSave($id, $data, $lifeTime = 0)
     {
-        return file_put_contents($this->addPath($id), $data);
+        $this->fileSystem->mkdir($this->cacheDir);
+
+        return file_put_contents($this->getCachePath($id), $data);
     }
 
     /**
@@ -47,7 +49,7 @@ class FilesystemCache extends CacheProvider
      */
     protected function doDelete($id)
     {
-        return $this->fileSystem->remove($this->addPath($id));
+        return $this->fileSystem->remove($this->getCachePath($id));
     }
 
     /**
@@ -77,7 +79,7 @@ class FilesystemCache extends CacheProvider
         );
     }
 
-    private function addPath($id)
+    private function getCachePath($id)
     {
         return $this->cacheDir . sha1($id);
     }

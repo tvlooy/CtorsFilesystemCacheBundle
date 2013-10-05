@@ -13,7 +13,7 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "henrikbjorn/lurker": "dev-master"
+        "henrikbjorn/lurker": "1.0.0"
     },
     "autoload": {
         "psr-0": { "Ctors\\FilesystemCacheBundle": "" }
